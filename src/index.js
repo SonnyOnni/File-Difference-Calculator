@@ -2,12 +2,16 @@
 /* eslint-disable consistent-return */
 /* eslint-disable no-param-reassign */
 import _ from 'lodash';
+import { fileURLToPath } from 'url';
+import path from 'path';
 import fs from 'fs';
 
-const getDiff = (file1, file2) => {
-  const objFile1 = fs.readFileSync(`./${file1}`, 'utf-8');
-  const objFile2 = fs.readFileSync(`./${file2}`, 'utf-8');
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
+const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8');
+
+const findDiff = (objFile1, objFile2) => {
   const parsedFile1 = JSON.parse(objFile1);
   const parsedFile2 = JSON.parse(objFile2);
 
@@ -45,7 +49,16 @@ const getDiff = (file1, file2) => {
     };
   });
 
-  const anotherResult = changingKeys.reduce((acc, item) => {
+  return changingKeys;
+}
+
+const getDiff = (file1, file2) => {
+  const objFile1 = readFile(file1);
+  const objFile2 = readFile(file2);
+
+  const diff = findDiff(objFile1, objFile2);
+
+  const anotherResult = diff.reduce((acc, item) => {
     if (item.type === 'unchanged') {
       acc += `   ${item.name}: ${item.value}\n`;
       return acc;
