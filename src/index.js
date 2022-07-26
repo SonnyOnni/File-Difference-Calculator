@@ -50,7 +50,7 @@ const findDiff = (objFile1, objFile2) => {
   });
 
   return changingKeys;
-}
+};
 
 const getDiff = (file1, file2) => {
   const objFile1 = readFile(file1);
