@@ -1,6 +1,5 @@
 install-deps: # Install dependencies
 	npm ci
-	npm link
 
 publish: # Publish npm package
 	npm publish --dry-run
