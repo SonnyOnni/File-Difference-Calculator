@@ -1,20 +1,17 @@
-/* eslint-disable array-callback-return */
-/* eslint-disable consistent-return */
 /* eslint-disable no-param-reassign */
+/* eslint-disable import/extensions */
 import _ from 'lodash';
 import { fileURLToPath } from 'url';
 import path from 'path';
 import fs from 'fs';
+import parserForFormats from './parsers.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
 const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8');
 
-const findDiff = (objFile1, objFile2) => {
-  const parsedFile1 = JSON.parse(objFile1);
-  const parsedFile2 = JSON.parse(objFile2);
-
+const findDiff = (parsedFile1, parsedFile2) => {
   const keys1 = Object.keys(parsedFile1);
   const keys2 = Object.keys(parsedFile2);
   const uniteKeys = _.sortBy(_.union(keys1, keys2));
@@ -53,11 +50,18 @@ const findDiff = (objFile1, objFile2) => {
 };
 
 const getDiff = (file1, file2) => {
+  const getFile1Format = file1.split('.');
+  const getFile2Format = file2.split('.');
+
   const objFile1 = readFile(file1);
   const objFile2 = readFile(file2);
 
-  const diff = findDiff(objFile1, objFile2);
+  const getParsedFile1 = parserForFormats(objFile1, getFile1Format[1]);
+  const getParsedFile2 = parserForFormats(objFile2, getFile2Format[1]);
 
+  const diff = findDiff(getParsedFile1, getParsedFile2);
+
+  // eslint-disable-next-line array-callback-return, consistent-return
   const anotherResult = diff.reduce((acc, item) => {
     if (item.type === 'unchanged') {
       acc += `   ${item.name}: ${item.value}\n`;
