@@ -5,48 +5,36 @@ import { fileURLToPath } from 'url';
 import path from 'path';
 import fs from 'fs';
 import parserForFormats from './parsers.js';
+import stylish from './stylish.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
 const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8');
 
-const findDiff = (parsedFile1, parsedFile2) => {
-  const keys1 = Object.keys(parsedFile1);
-  const keys2 = Object.keys(parsedFile2);
-  const uniteKeys = _.sortBy(_.union(keys1, keys2));
+const buildTree = (data1, data2) => {
+  const keys = Object.keys({ ...data1, ...data2 });
+  const sortedKeys = _.sortBy(keys);
 
-  const changingKeys = uniteKeys.map((key) => {
-    if (!_.has(parsedFile1, key)) {
+  return sortedKeys.map((key) => {
+    const value1 = data1[key];
+    const value2 = data2[key];
+    if (!_.has(data1, key)) {
+      return { type: 'add', key, val: value2 };
+    }
+    if (!_.has(data2, key)) {
+      return { type: 'remove', key, val: value1 };
+    }
+    if (_.isPlainObject(value1) && _.isPlainObject(value2)) {
+      return { type: 'recursion', key, children: buildTree(value1, value2) };
+    }
+    if (!_.isEqual(value1, value2)) {
       return {
-        name: key,
-        value: parsedFile2[key],
-        type: 'added',
+        type: 'updated', key, val1: value1, val2: value2,
       };
     }
-    if (!_.has(parsedFile2, key)) {
-      return {
-        name: key,
-        value: parsedFile1[key],
-        type: 'deleted',
-      };
-    }
-    if (parsedFile1[key] !== parsedFile2[key]) {
-      return {
-        name: key,
-        value1: parsedFile1[key],
-        value2: parsedFile2[key],
-        type: 'changed',
-      };
-    }
-    return {
-      name: key,
-      value: parsedFile1[key],
-      type: 'unchanged',
-    };
+    return { type: 'same', key, val: value1 };
   });
-
-  return changingKeys;
 };
 
 const getDiff = (file1, file2) => {
@@ -59,30 +47,8 @@ const getDiff = (file1, file2) => {
   const getParsedFile1 = parserForFormats(objFile1, getFile1Format[1]);
   const getParsedFile2 = parserForFormats(objFile2, getFile2Format[1]);
 
-  const diff = findDiff(getParsedFile1, getParsedFile2);
-
-  // eslint-disable-next-line array-callback-return, consistent-return
-  const anotherResult = diff.reduce((acc, item) => {
-    if (item.type === 'unchanged') {
-      acc += `   ${item.name}: ${item.value}\n`;
-      return acc;
-    }
-    if (item.type === 'deleted') {
-      acc += ` - ${item.name}: ${item.value}\n`;
-      return acc;
-    }
-    if (item.type === 'added') {
-      acc += ` + ${item.name}: ${item.value}\n`;
-      return acc;
-    }
-    if (item.type === 'changed') {
-      acc += ` - ${item.name}: ${item.value1}\n`;
-      acc += ` + ${item.name}: ${item.value2}\n`;
-      return acc;
-    }
-  }, '');
-
-  return `{\n${anotherResult}}`;
+  const diffTree = buildTree(getParsedFile1, getParsedFile2);
+  return stylish(diffTree);
 };
 
 export default getDiff;
