@@ -5,7 +5,7 @@ import { fileURLToPath } from 'url';
 import path from 'path';
 import fs from 'fs';
 import parserForFormats from './parsers.js';
-import stylish from './stylish.js';
+import formatter from './formatters/formatter.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -20,24 +20,24 @@ const buildTree = (data1, data2) => {
     const value1 = data1[key];
     const value2 = data2[key];
     if (!_.has(data1, key)) {
-      return { type: 'add', key, val: value2 };
+      return { type: 'added', key, val: value2 };
     }
     if (!_.has(data2, key)) {
-      return { type: 'remove', key, val: value1 };
+      return { type: 'removed', key, val: value1 };
     }
     if (_.isPlainObject(value1) && _.isPlainObject(value2)) {
       return { type: 'recursion', key, children: buildTree(value1, value2) };
     }
     if (!_.isEqual(value1, value2)) {
       return {
-        type: 'updated', key, val1: value1, val2: value2,
+        type: 'changed', key, val1: value1, val2: value2,
       };
     }
-    return { type: 'same', key, val: value1 };
+    return { type: 'unchanged', key, val: value1 };
   });
 };
 
-const getDiff = (file1, file2) => {
+const getDiff = (file1, file2, format = 'stylish') => {
   const getFile1Format = file1.split('.');
   const getFile2Format = file2.split('.');
 
@@ -48,7 +48,9 @@ const getDiff = (file1, file2) => {
   const getParsedFile2 = parserForFormats(objFile2, getFile2Format[1]);
 
   const diffTree = buildTree(getParsedFile1, getParsedFile2);
-  return stylish(diffTree);
+  const formatedTree = formatter(diffTree, format);
+
+  return formatedTree;
 };
 
 export default getDiff;

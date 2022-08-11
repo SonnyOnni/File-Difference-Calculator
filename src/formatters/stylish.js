@@ -21,13 +21,13 @@ const stylish = (diffTree) => {
   const iter = (tree, depth) => tree.map((node) => {
     const getValue = (value, sign) => `${indent(depth)}${sign} ${node.key}: ${stringify(value, depth)}\n`;
     switch (node.type) {
-      case 'add':
+      case 'added':
         return getValue(node.val, '+');
-      case 'remove':
+      case 'removed':
         return getValue(node.val, '-');
-      case 'same':
+      case 'unchanged':
         return getValue(node.val, ' ');
-      case 'updated':
+      case 'changed':
         return `${getValue(node.val1, '-')}${getValue(node.val2, '+')}`;
       case 'recursion':
         return `${indent(depth)}  ${node.key}: {\n${iter(node.children, depth + 1).join('')}${indent(depth)}  }\n`;

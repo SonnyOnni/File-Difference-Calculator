@@ -1,99 +1,18 @@
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import { test, expect } from '@jest/globals';
 import getDiff from '../src/index';
 
-const fileJson1 = 'file1.json';
-const fileJson2 = 'file2.json';
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
+const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf8');
 
-const fileYaml1 = 'file1.yaml';
-const fileYaml2 = 'file2.yaml';
+const extensions = ['json', 'yaml'];
 
-test('get difference between 2 files', () => {
-  expect(getDiff(fileJson1, fileJson2)).toEqual(`{
-    common: {
-      + follow: false
-        setting1: Value 1
-      - setting2: 200
-      - setting3: true
-      + setting3: null
-      + setting4: blah blah
-      + setting5: {
-            key5: value5
-        }
-        setting6: {
-            doge: {
-              - wow: 
-              + wow: so much
-            }
-            key: value
-          + ops: vops
-        }
-    }
-    group1: {
-      - baz: bas
-      + baz: bars
-        foo: bar
-      - nest: {
-            key: value
-        }
-      + nest: str
-    }
-  - group2: {
-        abc: 12345
-        deep: {
-            id: 45
-        }
-    }
-  + group3: {
-        deep: {
-            id: {
-                number: 45
-            }
-        }
-        fee: 100500
-    }
-}`);
-  expect(getDiff(fileYaml1, fileYaml2)).toEqual(`{
-    common: {
-      + follow: false
-        setting1: Value 1
-      - setting2: 200
-      - setting3: true
-      + setting3: null
-      + setting4: blah blah
-      + setting5: {
-            key5: value5
-        }
-        setting6: {
-            doge: {
-              - wow: 
-              + wow: so much
-            }
-            key: value
-          + ops: vops
-        }
-    }
-    group1: {
-      - baz: bas
-      + baz: bars
-        foo: bar
-      - nest: {
-            key: value
-        }
-      + nest: str
-    }
-  - group2: {
-        abc: 12345
-        deep: {
-            id: 45
-        }
-    }
-  + group3: {
-        deep: {
-            id: {
-                number: 45
-            }
-        }
-        fee: 100500
-    }
-}`);
+test.each(extensions)('get difference between 2 files', (extension) => {
+  const file1 = `file1.${extension}`;
+  const file2 = `file2.${extension}`;
+
+  expect(getDiff(file1, file2)).toEqual(readFile('correct-stylish.txt'));
 });
