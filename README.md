@@ -11,3 +11,7 @@
 ### Comparison of flat files (YAML/YML):
 
 [![asciicast](https://asciinema.org/a/512403.svg)](https://asciinema.org/a/512403)
+
+### Comparison of YAML/YML and JSON files (format 'stylish'):
+
+[![asciicast](https://asciinema.org/a/514310.svg)](https://asciinema.org/a/514310)
