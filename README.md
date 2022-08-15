@@ -15,3 +15,7 @@
 ### Comparison of YAML/YML and JSON files (format 'stylish'):
 
 [![asciicast](https://asciinema.org/a/514310.svg)](https://asciinema.org/a/514310)
+
+### Comparison of YAML/YML and JSON files (format 'plain'):
+
+[![asciicast](https://asciinema.org/a/515060.svg)](https://asciinema.org/a/515060)
