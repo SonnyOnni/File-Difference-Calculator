@@ -14,5 +14,6 @@ test.each(extensions)('get difference between 2 files', (extension) => {
   const file1 = `file1.${extension}`;
   const file2 = `file2.${extension}`;
 
-  expect(getDiff(file1, file2)).toEqual(readFile('correct-stylish.txt'));
+  expect(getDiff(file1, file2, 'stylish')).toEqual(readFile('correct-stylish.txt'));
+  expect(getDiff(file1, file2, 'plain')).toEqual(readFile('correct-plain.txt'));
 });

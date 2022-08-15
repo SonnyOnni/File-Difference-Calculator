@@ -5,7 +5,7 @@ import { fileURLToPath } from 'url';
 import path from 'path';
 import fs from 'fs';
 import parserForFormats from './parsers.js';
-import formatter from './formatters/formatter.js';
+import formatter from './formatters/index.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
