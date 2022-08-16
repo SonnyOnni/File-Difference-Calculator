@@ -8,7 +8,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
 const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf8');
 
-const extensions = ['json', 'yaml'];
+const extensions = ['json', 'yml'];
 
 test.each(extensions)('get difference between 2 files', (extension) => {
   const file1 = `file1.${extension}`;
