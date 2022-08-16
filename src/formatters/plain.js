@@ -31,7 +31,7 @@ const plain = (buildTree) => {
     }
   });
 
-  return `${iter(buildTree).join('')}`;
+  return `${iter(buildTree).join('').trim()}`;
 };
 
 export default plain;
