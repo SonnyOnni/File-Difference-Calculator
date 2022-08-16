@@ -9,7 +9,7 @@ import formatter from './formatters/index.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
+const getFixturePath = (filename) => path.resolve(__dirname, '..', '__fixtures__', filename);
 const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8');
 
 const buildTree = (data1, data2) => {
