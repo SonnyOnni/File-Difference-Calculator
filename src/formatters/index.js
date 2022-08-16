@@ -9,5 +9,8 @@ export default (data, format) => {
   if (format === 'plain') {
     return plain(data);
   }
+  if (format === 'json') {
+    return JSON.stringify(data[0]);
+  }
   return 'Uncorect format';
 };
