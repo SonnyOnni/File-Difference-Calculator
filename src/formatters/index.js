@@ -10,7 +10,7 @@ export default (data, format) => {
     return plain(data);
   }
   if (format === 'json') {
-    return JSON.stringify(data[0]);
+    return JSON.stringify(data);
   }
   return 'Uncorect format';
 };
