@@ -24,7 +24,7 @@ const plain = (buildTree) => {
         return '';
       case 'changed':
         return `Property '${depthKey.slice(1)}' was updated. From ${stringify(node.val1)} to ${stringify(node.val2)}\n`;
-      case 'recursion':
+      case 'nested':
         return `${iter(node.children, depthKey).join('')}`;
       default:
         throw new Error(`Этого типа не существует: ${node.type}`);

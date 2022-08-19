@@ -29,7 +29,7 @@ const stylish = (diffTree) => {
         return getValue(node.val, ' ');
       case 'changed':
         return `${getValue(node.val1, '-')}${getValue(node.val2, '+')}`;
-      case 'recursion':
+      case 'nested':
         return `${indent(depth)}  ${node.key}: {\n${iter(node.children, depth + 1).join('')}${indent(depth)}  }\n`;
       default:
         throw new Error(`Этого типа не существует: ${node.type}`);

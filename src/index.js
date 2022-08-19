@@ -1,41 +1,14 @@
-/* eslint-disable no-param-reassign */
-/* eslint-disable import/extensions */
-import _ from 'lodash';
 import { fileURLToPath } from 'url';
 import path from 'path';
 import fs from 'fs';
 import parserForFormats from './parsers.js';
 import formatter from './formatters/index.js';
+import buildTree from './buildTree.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const getFixturePath = (filename) => path.resolve(__dirname, '..', '__fixtures__', filename);
 const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8');
-
-const buildTree = (data1, data2) => {
-  const keys = Object.keys({ ...data1, ...data2 });
-  const sortedKeys = _.sortBy(keys);
-
-  return sortedKeys.map((key) => {
-    const value1 = data1[key];
-    const value2 = data2[key];
-    if (!_.has(data1, key)) {
-      return { type: 'added', key, val: value2 };
-    }
-    if (!_.has(data2, key)) {
-      return { type: 'removed', key, val: value1 };
-    }
-    if (_.isPlainObject(value1) && _.isPlainObject(value2)) {
-      return { type: 'recursion', key, children: buildTree(value1, value2) };
-    }
-    if (!_.isEqual(value1, value2)) {
-      return {
-        type: 'changed', key, val1: value1, val2: value2,
-      };
-    }
-    return { type: 'unchanged', key, val: value1 };
-  });
-};
 
 const getDiff = (file1, file2, format = 'stylish') => {
   const getFile1Format = file1.split('.');

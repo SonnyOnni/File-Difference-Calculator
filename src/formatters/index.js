@@ -1,16 +1,15 @@
-/* eslint-disable import/extensions */
 import stylish from './stylish.js';
 import plain from './plain.js';
 
 export default (data, format) => {
-  if (format === 'stylish') {
-    return stylish(data);
+  switch (format) {
+    case 'stylish':
+      return stylish(data);
+    case 'plain':
+      return plain(data);
+    case 'json':
+      return JSON.stringify(data);
+    default:
+      throw new Error('Uncorect format');
   }
-  if (format === 'plain') {
-    return plain(data);
-  }
-  if (format === 'json') {
-    return JSON.stringify(data);
-  }
-  return 'Uncorect format';
 };

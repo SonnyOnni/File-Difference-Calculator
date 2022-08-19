@@ -9,3 +9,7 @@ parserOptions:
   # Включает поддержку конструкции import.meta.url
 rules:
   no-underscore-dangle: [2, { "allow": ["__filename", "__dirname"] }] # разрешает подчёркивание в именах только для двух констант
+  import/extensions: 0
+  no-param-reassign: 0
+  no-console: 0
+
