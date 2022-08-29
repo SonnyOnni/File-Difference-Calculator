@@ -8,7 +8,7 @@ lint: # Run linter
 	npx eslint .
 
 test: # Run tests
-	npx jest
+	NODE_OPTIONS=--experimental-vm-modules npx jest
 
 test-watch: # Run tests with watch
 	npm test -s -- --watch
