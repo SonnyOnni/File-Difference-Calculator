@@ -4,7 +4,7 @@
   "type": "module",
   "description": "[![Actions Status](https://github.com/SonnyOnni/frontend-project-lvl2/workflows/hexlet-check/badge.svg)](https://github.com/SonnyOnni/frontend-project-lvl2/actions)",
   "bin": {
-    "gendiff": "bin/gendiff.js"
+    "gendiff": "bin/gendiff"
   },
   "main": "src/index.js",
   "scripts": {
@@ -28,6 +28,7 @@
   },
   "devDependencies": {
     "@jest/globals": "^29.0.1",
+    "@types/commander": "^2.12.2",
     "eslint": "^8.22.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.26.0",
