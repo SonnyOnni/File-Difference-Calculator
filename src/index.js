@@ -1,12 +1,11 @@
 import path from 'path';
 import fs from 'fs';
-import { fileURLToPath } from 'url';
+import { cwd } from 'process';
 import parserForFormats from './parsers.js';
 import formatter from './formatters/index.js';
 import buildTree from './buildTree.js';
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
+const getFixturePath = (filename) => path.resolve(cwd(), filename);
 const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8');
 
 const getDiff = (file1, file2, format = 'stylish') => {
