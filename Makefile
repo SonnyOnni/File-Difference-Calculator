@@ -1,5 +1,3 @@
-SHELL := /bin/bash
-
 install: # Install dependencies
 	npm ci
 
