@@ -1,4 +1,4 @@
-#!/bin/bash node
+#!/usr/bin/sh node
 import { Command } from 'commander/esm.mjs';
 import getDiff from '../src/index.js';
 
