@@ -12,14 +12,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SonnyOnni/frontend-project-lvl2.git"
+    "url": "git+https://github.com/SonnyOnni/File-Difference-Calculator.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/SonnyOnni/frontend-project-lvl2/issues"
+    "url": "https://github.com/SonnyOnni/File-Difference-Calculator/issues"
   },
-  "homepage": "https://github.com/SonnyOnni/frontend-project-lvl2#readme",
+  "homepage": "https://github.com/SonnyOnni/File-Difference-Calculator#readme",
   "dependencies": {
     "commander": "^9.4.0",
     "js-yaml": "^4.1.0",
