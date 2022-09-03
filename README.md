@@ -1,21 +1,21 @@
 ### Hexlet tests and linter status:
-[![Actions Status](https://github.com/SonnyOnni/frontend-project-lvl2/workflows/hexlet-check/badge.svg)](https://github.com/SonnyOnni/frontend-project-lvl2/actions)
-<a href="https://codeclimate.com/github/SonnyOnni/frontend-project-lvl2/maintainability"><img src="https://api.codeclimate.com/v1/badges/03041ceb56bdff456e45/maintainability" /></a>
-[![ESlint](https://github.com/SonnyOnni/frontend-project-lvl2/actions/workflows/eslint.yml/badge.svg)](https://github.com/SonnyOnni/frontend-project-lvl2/actions)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/03041ceb56bdff456e45/test_coverage)](https://codeclimate.com/github/SonnyOnni/frontend-project-lvl2/test_coverage)
+[![Actions Status](https://github.com/SonnyOnni/File-Difference-Calculator/workflows/hexlet-check/badge.svg)](https://github.com/SonnyOnni/File-Difference-Calculator/actions)
+<a href="https://codeclimate.com/github/SonnyOnni/File-Difference-Calculator/maintainability"><img src="https://api.codeclimate.com/v1/badges/03041ceb56bdff456e45/maintainability" /></a>
+[![ESlint](https://github.com/SonnyOnni/File-Difference-Calculator/actions/workflows/eslint.yml/badge.svg)](https://github.com/SonnyOnni/File-Difference-Calculator/actions)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/03041ceb56bdff456e45/test_coverage)](https://codeclimate.com/github/SonnyOnni/File-Difference-Calculator/test_coverage)
 
 # Description: 
 **Generator of difference** is the CLI programm that generate difference between two files. Supporting formats: JSON, YML, YAML.
 
 ## How to install:
 1. Make sure you have installed [Node.js](https://nodejs.org/en/) no lower version 12: ```node -v```.
-2. Clone repository: ```git@github.com:SonnyOnni/frontend-project-lvl2.git```.
-3. Change directory to frontend-project-lvl2
+2. Clone repository: ```git@github.com:SonnyOnni/File-Difference-Calculator.git```.
+3. Change directory to File-Difference-Calculator
 4. Run the command: ```make install```.
 
 ```shell
-$ git clone git@github.com:SonnyOnni/frontend-project-lvl2.git
-$ cd frontend-project-lvl2
+$ git clone git@github.com:SonnyOnni/File-Difference-Calculator.git
+$ cd File-Difference-Calculator
 $ make install
 ```
 
