@@ -2,7 +2,7 @@
   "name": "@hexlet/code",
   "version": "1.0.0",
   "type": "module",
-  "description": "[![Actions Status](https://github.com/SonnyOnni/frontend-project-lvl2/workflows/hexlet-check/badge.svg)](https://github.com/SonnyOnni/frontend-project-lvl2/actions)",
+  "description": "Generator of difference is the CLI programm that generate difference between two files. Supporting formats: JSON, YML, YAML.",
   "bin": {
     "gendiff": "bin/gendiff.js"
   },
@@ -22,7 +22,6 @@
   "homepage": "https://github.com/SonnyOnni/frontend-project-lvl2#readme",
   "dependencies": {
     "commander": "^9.4.0",
-    "debug": "^4.3.4",
     "js-yaml": "^4.1.0",
     "lodash": "^4.17.21"
   },

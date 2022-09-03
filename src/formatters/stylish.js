@@ -17,7 +17,7 @@ const stringify = (currentValue, depth) => {
   ].join('\n');
 };
 
-const stylish = (diffTree) => {
+const formatStylish = (diffTree) => {
   const iter = (tree, depth) => tree.map((node) => {
     const getValue = (value, sign) => `${indent(depth)}${sign} ${node.key}: ${stringify(value, depth)}\n`;
     switch (node.type) {
@@ -38,4 +38,4 @@ const stylish = (diffTree) => {
   return `{\n${iter(diffTree, 1).join('')}}`;
 };
 
-export default stylish;
+export default formatStylish;

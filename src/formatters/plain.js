@@ -11,7 +11,7 @@ const stringify = (currentValue) => {
   return '[complex value]';
 };
 
-const plain = (buildTree) => {
+const formatPlain = (buildTree) => {
   const iter = (tree, currentKey = '') => tree.map((node) => {
     const depthKey = `${currentKey}.${node.key}`;
 
@@ -34,4 +34,4 @@ const plain = (buildTree) => {
   return `${iter(buildTree).join('').trim()}`;
 };
 
-export default plain;
+export default formatPlain;

@@ -9,7 +9,7 @@ const parserForFormats = (file, fileFormat) => {
     case 'yml':
       return yaml.load(file);
     default:
-      throw new Error(`Формат "${fileFormat}" не поддерживается.`);
+      throw new Error(`Format "${fileFormat}" is not supported.`);
   }
 };
 
